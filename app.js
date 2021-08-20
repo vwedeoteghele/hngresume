@@ -1,8 +1,9 @@
 const express = require("express");
+const dotenv = require("dotenv");
 const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
-const PORT = 5010;
+const PORT = process.env.PORT || 5010;
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.set("views", path.join(__dirname, "views"));
@@ -43,6 +44,11 @@ const contactSchema = new mongoose.Schema({
 const Contact = mongoose.model("Contact", contactSchema);
 
 app.get("/resume", (req, res) => {
+  res.render("resume");
+  console.log("log request");
+});
+
+app.get("/", (req, res) => {
   res.render("resume");
   console.log("log request");
 });
